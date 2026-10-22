@@ -1,0 +1,264 @@
+.calendarSection {
+  position: relative;
+  padding: 48px 0 64px;
+}
+
+.calendarSection-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  top:-240px;
+  object-fit: cover;
+  object-position: bottom;
+  width: 100%;
+  height: auto;
+   @media (max-width: 980px) {
+    height: 100%;
+  }
+}
+
+.calendarSection-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.calendarLegend {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-2);
+}
+
+.calendarLegend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendarLegend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent-gold-ink);
+  flex-shrink: 0;
+}
+
+.calendarLegend-dot--today {
+  background: transparent;
+  border: 2px solid var(--accent-red);
+}
+
+.calendarLegend-dot--important {
+  background: var(--accent-red);
+}
+
+.calendarGrid-wrap {
+  display: grid;
+  grid-template-columns: minmax(320px, 496px) 1fr;
+  gap: 24px;
+  align-items: start;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calendarCard {
+  background: var(--surface-card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+}
+
+.calendarCard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.calendarCard-month {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.calendarCard-monthZh {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink-1);
+}
+
+.calendarCard-year {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-3);
+}
+
+.calendarCard-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendarWeekdays,
+.calendarDates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+.calendarWeekdays {
+  margin-bottom: 8px;
+}
+
+.calendarWeekdays span {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-3);
+  padding: 6px 0;
+}
+
+.calendarDate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-1);
+  cursor: pointer;
+}
+
+.calendarDate:hover,
+.calendarDate:focus-visible {
+  background: var(--surface-tint);
+}
+
+.calendarDate::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-gold-ink);
+  opacity: 0;
+}
+
+.calendarDate[data-has-event="true"]::after {
+  opacity: 1;
+}
+
+.calendarDate[data-is-today="true"] {
+  border: 2px solid var(--accent-red);
+  color: var(--accent-red);
+  font-weight: 600;
+}
+
+// 「重要期程」為固定標記，不隨點選狀態改變
+.calendarDate[data-important="true"] {
+  background: var(--accent-red);
+  color: #fff;
+  font-weight: 700;
+  border-color: var(--accent-red);
+}
+
+.calendarDate[data-important="true"]::after {
+  background: #fff;
+}
+
+// 目前選取（點選查看右側內容）：疊加一圈外框，與固定標記分開表達，避免語意混淆
+.calendarDate[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px var(--surface-card), 0 0 0 4px var(--brand-maroon);
+}
+
+.calendarDate-empty {
+  visibility: hidden;
+}
+
+.calendarAgenda {
+  background: var(--surface-card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.calendarAgenda-selected {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calendarAgenda-selectedDate {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--brand-maroon);
+}
+
+.calendarAgenda-selectedItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-2);
+}
+
+.calendarAgenda-selectedItem::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  flex-shrink: 0;
+}
+
+.calendarAgenda-upcomingTitle {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+.calendarAgenda-upcomingList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.calendarAgenda-upcomingItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: var(--radius-base);
+  background: var(--surface-tint);
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+
+.calendarAgenda-upcomingDate {
+  font-weight: 700;
+  color: var(--brand-maroon);
+  flex-shrink: 0;
+}
+
+.calendarAgenda-upcomingLabel {
+  color: var(--ink-2);
+}

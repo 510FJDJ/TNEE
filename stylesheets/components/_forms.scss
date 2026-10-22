@@ -1,0 +1,136 @@
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+.requiredPill {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-coral-ink);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.formLabel-aside {
+  margin-left: auto;
+  font-size: 16px;
+}
+
+.inputField {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: var(--radius-base);
+  border: 1px solid var(--line-input);
+  background: var(--surface-input);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-1);
+  transition: border-color var(--dur-ui) var(--ease-brand), box-shadow var(--dur-ui) var(--ease-brand);
+
+  &::placeholder {
+    color: var(--ink-3);
+  }
+
+  &:hover {
+    border-color: var(--line-input-hover);
+  }
+}
+
+.inputField-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputField-trailingBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--ink-3);
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--brand-maroon);
+  }
+}
+
+.captchaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.captchaImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  height: 48px;
+  padding: 0 12px;
+  border-radius: var(--radius-base);
+  background: var(--surface-tint);
+  border: 1px solid var(--line-default);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+
+.searchField {
+  flex: 1 1 220px;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: var(--radius-base);
+  border: 1px solid var(--line-default);
+  background: #fff;
+}
+
+.searchField input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-1);
+
+  &::placeholder {
+    color: var(--ink-3);
+  }
+}
+
+.searchField-icon {
+  color: var(--ink-3);
+  flex-shrink: 0;
+}

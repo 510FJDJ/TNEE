@@ -1,0 +1,21 @@
+{
+  "name": "tnee",
+  "version": "0.1.0",
+  "private": true,
+  "description": "臺南市高級中等以下教育階段非學校型態實驗教育 官方網站",
+  "scripts": {
+    "sass:build": "sass stylesheets/all.scss css/all.css --style=expanded --quiet",
+    "sass:watch": "sass stylesheets/all.scss css/all.css --style=expanded --quiet --watch",
+    "serve": "python -m http.server 5500"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3"
+  },
+  "devDependencies": {
+    "@fontsource/noto-sans-tc": "^5.2.5",
+    "@fontsource/noto-serif-tc": "^5.2.5",
+    "@fontsource/poppins": "^5.2.5",
+    "sass": "^1.80.6"
+  }
+}

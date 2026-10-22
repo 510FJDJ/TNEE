@@ -1,0 +1,143 @@
+// 元件以外型命名，搭配色票修飾子；JS 若需選取元素另加 data-* 屬性
+
+.btnSolid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: var(--radius-base);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--dur-ui) var(--ease-brand), transform var(--dur-ui) var(--ease-brand);
+}
+
+.btnSolid-maroon {
+  background: var(--brand-maroon);
+  color: #fff;
+
+  &:hover {
+    background: var(--brand-maroon-deep);
+    text-decoration: none;
+  }
+}
+
+.btnSolid[aria-disabled="true"] {
+  background: var(--line-default);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-default);
+  background: #fff;
+  color: var(--ink-1);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--dur-ui) var(--ease-brand), color var(--dur-ui) var(--ease-brand);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--brand-maroon);
+    color: var(--brand-maroon);
+    text-decoration: none;
+  }
+}
+
+.btnText {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--brand-maroon);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.iconCircleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line-default);
+  background: #fff;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color var(--dur-ui) var(--ease-brand), color var(--dur-ui) var(--ease-brand);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--brand-maroon);
+    color: var(--brand-maroon);
+  }
+
+  &[aria-disabled="true"] {
+    color: var(--line-default);
+    cursor: not-allowed;
+
+    &:hover {
+      border-color: var(--line-default);
+      color: var(--line-default);
+    }
+  }
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 50px;
+  right: 25px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--brand-maroon);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity var(--dur-ui) var(--ease-brand), transform var(--dur-ui) var(--ease-brand);
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--brand-maroon-deep);
+  }
+}
+
+.scroll-top-text {
+  font-size: 11px;
+  line-height: 1;
+}

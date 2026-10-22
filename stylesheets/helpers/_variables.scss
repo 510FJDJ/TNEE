@@ -1,0 +1,28 @@
+// Bootstrap 5 變數覆寫 — 僅取用 Reboot / Grid / Utilities，不掛載 Bootstrap 元件樣式
+// 色票／字體／間距的單一事實來源見 design.md，這裡只是把同樣的值接進 Bootstrap 的編譯管線
+
+$font-family-sans-serif: "Poppins", "Noto Sans TC", -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-base: $font-family-sans-serif;
+
+$body-bg: #FAF8F1;
+$body-color: #2B211C;
+
+$primary: #6D2125;
+$secondary: #A9793F;
+
+$grid-gutter-width: 24px;
+
+// .container 最大寬 1280px、左右留白 32px（見 design.md §4）。
+// 全部斷點統一設為 1280px，等同「100% 寬度，超過 1280 後置中」的單一上限，
+// 比照原自製 .pageContainer 的行為；行動版（<980px）留白縮為 22px，
+// 覆寫寫在 components/_layout.scss（調整 --bs-gutter-x，見該檔案說明）。
+$container-max-widths: (
+  sm: 1280px,
+  md: 1280px,
+  lg: 1280px,
+  xl: 1280px,
+  xxl: 1280px
+);
+$container-padding-x: 64px; // padding-left/right = 64px * .5 = 32px
+
+$enable-negative-margins: true;

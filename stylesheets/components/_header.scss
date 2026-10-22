@@ -1,0 +1,153 @@
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: none;
+  transition: background-color var(--dur-ui) var(--ease-brand);
+}
+
+// 往下捲動後加上半透明白底＋模糊，避免 header 文字被底下捲動內容蓋過
+// （js/header.js 監聽 scroll 切換此 class；頁面最頂端維持無底色以露出緞帶裝飾）
+.siteHeader--scrolled {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.siteHeader-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 10px 20px;
+}
+
+.siteHeader-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.siteHeader-logo {
+  height: 50px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.siteHeader-wordmark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.25;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.siteHeader-wordmarkSub {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.siteHeader-wordmarkTitle {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.siteHeader-wordmarkEn {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--accent-gold-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 560px) {
+    display: none;
+  }
+}
+
+// 手機版縮小 logo 比例並讓文字跟著降級，避免 logo 擠壓「非學校型態實驗教育」文字
+@media (max-width: 560px) {
+  .siteHeader-brand {
+    gap: 10px;
+  }
+
+  .siteHeader-logo {
+    height: 38px;
+  }
+
+  .siteHeader-wordmarkTitle {
+    font-size: 18px;
+  }
+
+  .siteHeader-wordmarkSub {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .siteHeader-logo {
+    height: 32px;
+  }
+
+  .siteHeader-wordmarkTitle {
+    font-size: 16px;
+  }
+
+  .siteHeader-wordmarkSub {
+    font-size: 10px;
+  }
+}
+
+.siteNav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 860px) {
+    display: none;
+  }
+}
+
+.siteNav-link {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink-2);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--brand-maroon);
+    text-decoration: none;
+  }
+
+  &[aria-current="page"] {
+    color: var(--brand-maroon);
+    font-weight: 600;
+  }
+}
+
+.siteHeader-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}

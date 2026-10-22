@@ -1,0 +1,62 @@
+.loginCard {
+  background: var(--surface-card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.loginCard-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--brand-maroon);
+  margin: 0;
+}
+
+.loginCard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginCard-helperRow {
+  font-family: var(--font-body);
+  font-size: 16px;
+}
+
+.loginCard-helperLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--ink-2);
+}
+
+.loginCard-registerRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  // Header「登入/註冊」CTA 捲動至此時留一點呼吸空間，避免貼著視窗底邊
+  scroll-margin-bottom: var(--space-16);
+}
+
+.loginCard-registerText {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-2);
+}
+
+.loginCard-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--line-soft);
+}

@@ -1,0 +1,22 @@
+// 純裝飾圖層，全部 aria-hidden，不承載資訊
+
+body {
+  background-image: url("../img/dec/台南實驗背景.jpg");
+  background-repeat: repeat;
+  background-size: 480px auto;
+  background-blend-mode: multiply;
+}
+
+.topRibbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(24vw, 520px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.heroWrap {
+  position: relative;
+  overflow: hidden;
+}

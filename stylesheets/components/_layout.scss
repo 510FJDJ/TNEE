@@ -1,0 +1,57 @@
+// 版面骨架：內容容器（用 Bootstrap .container，尺寸覆寫見 helpers/_variables.scss）、首頁各段落的共用間距
+
+// 行動版（<980px）留白縮為 22px：Bootstrap 本身的 $container-padding-x 不支援
+// 依斷點給不同值，故在這裡覆寫 .container 設定的 --bs-gutter-x 自訂屬性，
+// 不是重新定義 .container 本身。
+@media (max-width: 980px) {
+  .container {
+    --bs-gutter-x: 44px; // padding-left/right = 44px * .5 = 22px
+  }
+}
+
+.homeSection {
+  padding: 56px 12px;
+
+  @media (max-width: 980px) {
+    padding: 20px 12px;
+  }
+}
+
+.homeSection--tight {
+  padding-top: 0;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.sectionHeading-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--ink-1);
+  margin: 0;
+}
+
+.sectionHeading-eyebrow {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--accent-gold-ink);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(320px, 400px) 1fr;
+  gap: 36px;
+  align-items: start;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
+}

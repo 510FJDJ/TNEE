@@ -1,0 +1,396 @@
+// 註冊新帳號 / 網站隱私權條款 modal，使用原生 <dialog> 元素
+// （showModal() 內建焦點鎖定與 Esc 關閉，不需自行實作 focus trap）
+
+.fieldsetReset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+// dialog 本身改當「全螢幕捲動容器」用：鋪滿 viewport、透明、不裁切，
+// 捲動軸交給 dialog 自己的 overflow-y（在 viewport 邊緣），不要讓卡片
+// 內部另外出現一層滾動軸——視覺卡片（背景／圓角／陰影／padding）移到
+// .modalCard-inner 這個子層，內容過高時卡片會整個往下延伸，由外層捲動，
+// 不會在卡片裡夾一條內縮的捲軸。
+dialog.modalCard {
+  position: fixed;
+  inset: 0;
+  // dialog 原生樣式表預設 width/height: fit-content 且有 max-width/
+  // max-height: calc(100% - Npx) 的隱藏上限，會蓋掉 inset:0 原本想要的
+  // 鋪滿效果，導致 dialog 自己縮成內容大小，捲軸跟著縮在卡片旁邊而不是
+  // 貼齊視窗邊緣——這裡一定要明寫 100% 撐滿並清掉原生 max-width/
+  // max-height，捲軸才會在視窗邊緣、卡片才會左右置中。
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 40px 32px;
+  border: none;
+  background: transparent;
+  overflow-y: auto;
+
+  @media (max-width: 560px) {
+    padding: 24px 22px;
+  }
+
+  // display 一定要用 [open] 限定：dialog 原生樣式表用 `dialog:not([open]) { display:none }`
+  // 隱藏未開啟的對話框，若這裡寫無條件的 `display: grid`，因為跟原生規則特異度打平、
+  // 又排在原生樣式表之後，會蓋掉 display:none，導致關閉的 dialog 仍然顯示在畫面上。
+  &[open] {
+    display: grid;
+    // grid-template-columns 顯式鋪滿一欄：單一 grid item 在未設定欄寬時，
+    // 隱性欄會依內容縮到 fit-content 寬度，導致 .modalCard-inner 的
+    // width:min(560px,100%) 百分比基準跑掉，所以這裡明寫一欄 100%。
+    grid-template-columns: 100%;
+    // align-items 用 safe center：內容比 viewport 高時退回頂端對齊可捲動，
+    // 不可省略 safe，否則內容過高時頂部會被裁掉、無法捲上去看到（已知的
+    // flex/grid 置中 + overflow 捲動衝突問題）。
+    align-items: safe center;
+    justify-items: center;
+  }
+
+  &::backdrop {
+    background: rgba(43, 33, 28, 0.55);
+  }
+}
+
+.modalCard-inner {
+  width: min(560px, 100%);
+  padding: 32px;
+  border-radius: 20px;
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card-hover);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modalCard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.modalCard-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--brand-maroon);
+  margin: 0 0 4px;
+}
+
+.modalCard-subtitle {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.modalCard-closeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid var(--line-default);
+  background: #fff;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color var(--dur-ui) var(--ease-brand), color var(--dur-ui) var(--ease-brand);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--brand-maroon);
+    color: var(--brand-maroon);
+  }
+}
+
+.modalCard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalCard-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.modalCard-footer {
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
+.modalCard-footerLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.btnSolid-neutral {
+  background: var(--surface-tint);
+  color: var(--ink-2);
+
+  &:hover {
+    background: var(--line-soft);
+  }
+}
+
+// ── 單選群組（註冊類型／帳號類型）──────────────────────────
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.radioOption {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-1);
+  cursor: pointer;
+
+  input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--brand-maroon);
+    cursor: pointer;
+  }
+}
+
+.formLabel-hint {
+  font-weight: 400;
+  color: var(--ink-3);
+  font-size: 15px;
+}
+
+// ── 隱私權同意勾選 ──────────────────────────────────────────
+.agreementRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: var(--radius-base);
+  border: 1px solid var(--line-default);
+  background: var(--surface-tint);
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--brand-maroon);
+    cursor: pointer;
+  }
+}
+
+.agreementRow-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agreementRow-title {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+.agreementRow-link {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.agreementRow-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+// ── 帳號填寫說明 tooltip ────────────────────────────────────
+.infoTooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.infoTooltip-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--brand-maroon);
+  cursor: pointer;
+  transition: background-color var(--dur-ui) var(--ease-brand);
+
+  &:hover,
+  &:focus-visible {
+    background: var(--surface-maroon-tint);
+  }
+}
+
+.infoTooltip-panel {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 260px;
+  padding: 16px;
+  border-radius: var(--radius-base);
+  background: var(--surface-card);
+  border: 1px solid var(--line-default);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.infoTooltip-title {
+  margin: 0 0 10px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+.infoTooltip-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoTooltip-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+
+  dt {
+    flex: 0 0 72px;
+    font-weight: 700;
+    color: var(--accent-gold-ink);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--ink-2);
+  }
+}
+
+// ── 網站隱私權條款內文 ──────────────────────────────────────
+.privacyModal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.privacyModal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink-1);
+  }
+
+  p {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+}
+
+// ── 公告詳情 modal（最新消息／相關法規列表點選後開啟）────────
+.modalCard--wide .modalCard-inner {
+  width: min(720px, 100%);
+}
+
+.modalMeta-intro {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.modalMeta-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalMeta-row {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-soft);
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  dt {
+    width: 64px;
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brand-maroon);
+  }
+
+  dd {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+}
+
+.modalMeta-attachmentsTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 8px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink-1);
+
+  // 標題右側的裝飾分隔線，呼應參考圖的版型，純裝飾不承載資訊
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line-default);
+  }
+}

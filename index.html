@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <script>
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臺南市高級中等以下教育階段 非學校型態實驗教育</title>
+    <meta name="description" content="臺南市高級中等以下教育階段非學校型態實驗教育官方網站：線上申請、公告表件查詢、行事曆與申請流程說明。">
+    <link rel="icon" href="img/Logo/臺南市政府logo.png" type="image/png">
+    <link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+    <a href="#goCenter" class="sr-only focusable" accesskey="C" title="跳過導覽列，進入主要內容區">主要內容區</a>
+    <a href="#headerNav" class="sr-only focusable" accesskey="U" title="跳至上方導覽列" tabindex="-1">上方導覽列</a>
+    <a href="#footerAnchor" class="sr-only focusable" accesskey="Z" title="跳至頁尾資訊區">頁尾資訊區</a>
+
+    <div data-layout="layout/header.html"></div>
+
+    <main id="goCenter" class="mainContent" tabindex="-1">
+        <div class="heroWrap">
+            <section class="homeSection container" id="login" aria-labelledby="loginHeading">
+                <div class="heroGrid">
+                    <div class="loginCard">
+                        <h1 id="loginHeading" class="loginCard-title">登入</h1>
+
+                        <form class="loginCard-form" novalidate>
+                            <div class="formGroup">
+                                <label class="formLabel" for="loginAccount">
+                                    帳號
+                                    <span class="requiredPill">必填</span>
+                                </label>
+                                <input class="inputField" type="text" id="loginAccount" name="account" placeholder="請輸入身分證字號或學校代碼" autocomplete="username" required>
+                            </div>
+
+                            <div class="formGroup">
+                                <div class="flex-row-between">
+                                    <label class="formLabel" for="loginPassword">
+                                        密碼（區分大小寫）
+                                        <span class="requiredPill">必填</span>
+                                    </label>
+                                    <button type="button" class="btnText formLabel-aside" data-modal-open="forgotPasswordModal">忘記密碼？</button>
+                                </div>
+                                <div class="inputField-row">
+                                    <input class="inputField" type="password" id="loginPassword" name="password" placeholder="請輸入密碼" autocomplete="current-password" required>
+                                    <button type="button" class="inputField-trailingBtn" id="passwordToggle" aria-pressed="false" aria-label="顯示密碼">
+                                        <i class="bi bi-eye" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="formGroup">
+                                <label class="formLabel" for="loginCaptcha">
+                                    驗證碼
+                                    <span class="requiredPill">必填</span>
+                                </label>
+                                <div class="captchaRow">
+                                    <input class="inputField" type="text" id="loginCaptcha" name="captcha" placeholder="驗證碼" autocomplete="off" required>
+                                    <span class="captchaImage" id="captchaCode" aria-hidden="true">7K2M</span>
+                                    <button type="button" class="iconCircleBtn" id="captchaRefresh" aria-label="重新產生驗證碼">
+                                        <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="iconCircleBtn" aria-label="播放驗證碼語音">
+                                        <i class="bi bi-volume-up" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btnSolid btnSolid-maroon">
+                                立即登入
+                                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </form>
+
+                        <div class="loginCard-helperRow flex-row-between flex-wrap gap-2">
+                            <p class="loginCard-helperLine">
+                                收不到啟用信？
+                                <button type="button" class="btnText" data-modal-open="resendModal">重寄啟用碼</button>
+                            </p>
+                            <p class="loginCard-helperLine">
+                                <i class="bi bi-play-circle" aria-hidden="true"></i>
+                                <a class="btnText" href="#howto-video" target="_blank">操作影片</a>
+                            </p>
+                        </div>
+
+                        <div class="loginCard-registerRow" id="loginRegister">
+                            <p class="loginCard-registerText">
+                                <span class="loginCard-divider" aria-hidden="true"></span>
+                                尚未註冊帳號？
+                                <span class="loginCard-divider" aria-hidden="true"></span>
+                            </p>
+                            <button type="button" class="btnOutline w-100" id="registerTrigger" data-modal-open="registerModal">點此註冊</button>
+                        </div>
+                    </div>
+
+                    <div class="announcementSection" id="announcement" aria-labelledby="announcementHeading">
+                        <div class="sectionHeading">
+                            <h2 id="announcementHeading" class="sectionHeading-title">公告與表件</h2>
+                            <span class="sectionHeading-eyebrow">NEWS &amp; FORMS</span>
+                        </div>
+
+                        <div role="tablist" aria-label="公告與表件分類" class="tabList">
+                            <button role="tab" id="tab-news" aria-selected="true" aria-controls="panel-news" tabindex="0" class="tabBtn">最新消息</button>
+                            <button role="tab" id="tab-faq" aria-selected="false" aria-controls="panel-faq" tabindex="-1" class="tabBtn">常見問題</button>
+                            <button role="tab" id="tab-files" aria-selected="false" aria-controls="panel-files" tabindex="-1" class="tabBtn">表件下載</button>
+                            <button role="tab" id="tab-rules" aria-selected="false" aria-controls="panel-rules" tabindex="-1" class="tabBtn">相關法規</button>
+                        </div>
+
+                        <div class="announcementCard">
+                            <form class="announcementToolbar" data-search-form aria-label="公告篩選與搜尋">
+                                <div class="flex-row-start flex-wrap gap-2" data-filter-group role="group" aria-label="依階段篩選">
+                                    <span class="filterPill-label">階段</span>
+                                    <button type="button" class="filterPill" aria-pressed="true">全部</button>
+                                    <button type="button" class="filterPill" aria-pressed="false">不分類</button>
+                                    <button type="button" class="filterPill" aria-pressed="false">國小</button>
+                                    <button type="button" class="filterPill" aria-pressed="false">國中</button>
+                                    <button type="button" class="filterPill" aria-pressed="false">高中職</button>
+                                    <button type="button" class="filterPill" aria-pressed="false">團體機構</button>
+                                </div>
+                                <div class="flex-row-start flex-wrap gap-2 w-100">
+                                    <div class="searchField">
+                                        <i class="bi bi-search searchField-icon" aria-hidden="true"></i>
+                                        <label class="sr-only" for="announcementSearch">搜尋關鍵字</label>
+                                        <input type="search" id="announcementSearch" placeholder="搜尋關鍵字">
+                                    </div>
+                                    <button type="submit" class="btnSolid btnSolid-maroon">查詢</button>
+                                </div>
+                            </form>
+
+                            <div role="tabpanel" id="panel-news" aria-labelledby="tab-news" class="tabPanel">
+                                <ul class="flex-column list-plain">
+                                    <li class="listRow">
+                                        <span class="listRow-date">09/22</span>
+                                        <span class="tagPill">不分類</span>
+                                        <a class="listRow-title" href="#" data-announcement-link>臺南市115學年度非學校型態實驗申請計畫說明會</a>
+                                        <template>
+                                            <p class="modalMeta-intro">為協助有意申請非學校型態實驗教育的家長及申請人了解申請計畫，特辦理 115 學年度申請計畫說明會，歡迎踴躍報名參加。</p>
+                                            <dl class="modalMeta-list">
+                                                <div class="modalMeta-row">
+                                                    <dt>時間</dt>
+                                                    <dd>115 年 9 月 21 日（星期一）<br>上午 9:30 至 11:30</dd>
+                                                </div>
+                                                <div class="modalMeta-row">
+                                                    <dt>地點</dt>
+                                                    <dd>臺南市立新南國民小學<br>708 臺南市安平區怡平路 6 號</dd>
+                                                </div>
+                                                <div class="modalMeta-row">
+                                                    <dt>報名</dt>
+                                                    <dd>請於 115 年 9 月 20 日前線上報名<br><a class="btnText" href="#" target="_blank" rel="noopener">前往報名表單 <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i></a></dd>
+                                                </div>
+                                            </dl>
+                                            <div class="modalMeta-attachments">
+                                                <p class="modalMeta-attachmentsTitle">附件下載</p>
+                                                <ul class="flex-column list-plain">
+                                                    <li class="fileRow">
+                                                        <a class="fileRow-link" href="#" aria-label="下載臺南市非學校型態實驗教育簡易時間表">
+                                                            <i class="bi bi-file-earmark-pdf fileRow-icon" aria-hidden="true"></i>
+                                                            <span class="fileRow-name">臺南市非學校型態實驗教育簡易時間表（2026.08.01–2027.08.31）</span>
+                                                            <span class="fileRow-meta">
+                                                                <span class="fileRow-type">PDF</span>
+                                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </template>
+                                    </li>
+                                    <li class="listRow">
+                                        <span class="listRow-date">08/12</span>
+                                        <span class="tagPill">不分類</span>
+                                        <a class="listRow-title" href="#" data-announcement-link>外國教師聘雇許可申請</a>
+                                        <template>
+                                            <p class="modalMeta-intro">機構或團體如擬聘雇外國籍教師協助授課，請於開課前依規定備齊相關文件，向本局提出聘雇許可申請，審核通過後始得聘用。</p>
+                                        </template>
+                                    </li>
+                                    <li class="listRow">
+                                        <span class="listRow-date">07/31</span>
+                                        <span class="tagPill">團體機構</span>
+                                        <a class="listRow-title" href="#" data-announcement-link>配合續辦計畫調整之外國人聘雇許可申請及審核流程</a>
+                                        <template>
+                                            <p class="modalMeta-intro">因應續辦計畫內容調整，外國人聘雇許可之申請文件與審核流程同步修訂，團體與機構單位申請聘雇外國籍教師前請先確認最新流程，以免影響審核時程。</p>
+                                        </template>
+                                    </li>
+                                    <li class="listRow">
+                                        <span class="listRow-date">07/31</span>
+                                        <span class="tagPill">不分類</span>
+                                        <a class="listRow-title" href="#" data-announcement-link>請於期限內繳交114學年度學習狀況報告書或成果報告書</a>
+                                        <template>
+                                            <p class="modalMeta-intro">依規定，已核准辦理非學校型態實驗教育之學生，應於期限內繳交學習狀況報告書或成果報告書，請尚未繳交者儘速備齊資料並上傳，逾期恐影響次學年度之續辦審核。</p>
+                                            <dl class="modalMeta-list">
+                                                <div class="modalMeta-row">
+                                                    <dt>期限</dt>
+                                                    <dd>115 年 8 月 31 日（星期一）前</dd>
+                                                </div>
+                                            </dl>
+                                        </template>
+                                    </li>
+                                    <li class="listRow">
+                                        <span class="listRow-date">07/09</span>
+                                        <span class="tagPill">高中職</span>
+                                        <a class="listRow-title" href="#" data-announcement-link>配合續辦計畫調整之外國人聘雇許可申請及審核流程-檢易留程圖</a>
+                                        <template>
+                                            <p class="modalMeta-intro">本流程圖整理外國人聘雇許可申請之各階段作業與檢核重點，提供高中職階段申請單位於辦理聘雇作業時參考使用。</p>
+                                            <div class="modalMeta-attachments">
+                                                <p class="modalMeta-attachmentsTitle">附件下載</p>
+                                                <ul class="flex-column list-plain">
+                                                    <li class="fileRow">
+                                                        <a class="fileRow-link" href="#" aria-label="下載外國人聘雇許可申請審核流程圖">
+                                                            <i class="bi bi-file-earmark-pdf fileRow-icon" aria-hidden="true"></i>
+                                                            <span class="fileRow-name">外國人聘雇許可申請審核流程圖</span>
+                                                            <span class="fileRow-meta">
+                                                                <span class="fileRow-type">PDF</span>
+                                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </template>
+                                    </li>
+                                    <li class="listRow">
+                                        <span class="listRow-date">07/31</span>
+                                        <span class="tagPill">不分類</span>
+                                        <a class="listRow-title" href="#" data-announcement-link>配合續辦計畫調整之外國人聘雇許可申請及審核流程</a>
+                                        <template>
+                                            <p class="modalMeta-intro">配合續辦計畫內容調整，外國人聘雇許可之申請文件與審核流程已同步修訂，請申請單位改以最新版本辦理，避免因沿用舊版文件而須補正。</p>
+                                        </template>
+                                    </li>
+                                </ul>
+
+                                <nav class="pagination" aria-label="最新消息分頁">
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="第一頁"><i class="bi bi-chevron-bar-left" aria-hidden="true"></i></button>
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="上一頁">上一頁</button>
+                                    <button type="button" class="pageBtn" aria-current="page">1</button>
+                                    <button type="button" class="pageBtn">2</button>
+                                    <button type="button" class="pageBtn">3</button>
+                                    <span aria-hidden="true">…</span>
+                                    <button type="button" class="pageBtn">8</button>
+                                    <button type="button" class="pageBtn" aria-label="下一頁">下一頁</button>
+                                    <button type="button" class="pageBtn" aria-label="最末頁"><i class="bi bi-chevron-bar-right" aria-hidden="true"></i></button>
+                                </nav>
+                            </div>
+
+                            <div role="tabpanel" id="panel-faq" aria-labelledby="tab-faq" class="tabPanel" hidden>
+                                <div class="faqItem">
+                                    <button type="button" class="faqItem-trigger" aria-expanded="false" aria-controls="faq-panel-1">
+                                        <span class="faqItem-mark" aria-hidden="true">Q</span>
+                                        <span class="faqItem-question">為甚麼收不到驗證信？忘記密碼怎麼辦？</span>
+                                        <span class="tagPill faqItem-tag">帳號登入</span>
+                                        <i class="bi bi-chevron-down faqItem-chevron" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="faqItem-panel" id="faq-panel-1" hidden>
+                                        收不到認證信：請來電系統廠商辛太科技 02-2748-7499，並說明是臺南非學家長，工程師會盡快協助。忘記密碼：在登入卡片「密碼」右側點「忘記密碼？」，系統會把密碼函件寄到您註冊時填寫的信箱。另外提醒：開啟檔案所需的密碼，就是您的登入密碼。
+                                    </div>
+                                </div>
+                                <div class="faqItem">
+                                    <button type="button" class="faqItem-trigger" aria-expanded="false" aria-controls="faq-panel-2">
+                                        <span class="faqItem-mark" aria-hidden="true">Q</span>
+                                        <span class="faqItem-question">「完整的申請書」包括哪些項目？</span>
+                                        <span class="tagPill faqItem-tag">準備申請</span>
+                                        <i class="bi bi-chevron-down faqItem-chevron" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="faqItem-panel" id="faq-panel-2" hidden>
+                                        請至「表件下載」分頁下載對應身分別的申請書範本，並依說明會指引檢附所有必要文件與同意書後一併上傳。
+                                    </div>
+                                </div>
+                                <div class="faqItem">
+                                    <button type="button" class="faqItem-trigger" aria-expanded="false" aria-controls="faq-panel-3">
+                                        <span class="faqItem-mark" aria-hidden="true">Q</span>
+                                        <span class="faqItem-question">團體、機構要上傳的文件有哪些？</span>
+                                        <span class="tagPill faqItem-tag">準備申請</span>
+                                        <i class="bi bi-chevron-down faqItem-chevron" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="faqItem-panel" id="faq-panel-3" hidden>
+                                        團體、機構申請人請於「表件下載」分頁下載團體申請書，並依規定檢附立案證明、課程計畫與相關同意書。
+                                    </div>
+                                </div>
+                                <div class="faqItem">
+                                    <button type="button" class="faqItem-trigger" aria-expanded="false" aria-controls="faq-panel-4">
+                                        <span class="faqItem-mark" aria-hidden="true">Q</span>
+                                        <span class="faqItem-question">申請時一定要附與設籍學校的協議書嗎？要如何協議？</span>
+                                        <span class="tagPill faqItem-tag">準備申請</span>
+                                        <i class="bi bi-chevron-down faqItem-chevron" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="faqItem-panel" id="faq-panel-4" hidden>
+                                        是，請先與設籍學校聯繫協議相關事宜，並將雙方用印完成的協議書一併隨申請書上傳。
+                                    </div>
+                                </div>
+                                <div class="faqItem">
+                                    <button type="button" class="faqItem-trigger" aria-expanded="false" aria-controls="faq-panel-5">
+                                        <span class="faqItem-mark" aria-hidden="true">Q</span>
+                                        <span class="faqItem-question">年度和學年度要怎麼換算？</span>
+                                        <span class="tagPill faqItem-tag">準備申請</span>
+                                        <i class="bi bi-chevron-down faqItem-chevron" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="faqItem-panel" id="faq-panel-5" hidden>
+                                        學年度自每年8月1日起算至隔年7月31日止，與一般年度（1月至12月）不同，請留意申請書填寫時使用學年度。
+                                    </div>
+                                </div>
+                                <div class="faqItem">
+                                    <button type="button" class="faqItem-trigger" aria-expanded="false" aria-controls="faq-panel-6">
+                                        <span class="faqItem-mark" aria-hidden="true">Q</span>
+                                        <span class="faqItem-question">申請後，甚麼時候會知道審議結果？</span>
+                                        <span class="tagPill faqItem-tag">審查與補件</span>
+                                        <i class="bi bi-chevron-down faqItem-chevron" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="faqItem-panel" id="faq-panel-6" hidden>
+                                        審議結果將於會議結束後，以系統通知及電子郵件方式通知申請人，詳細時程請參考行事曆。
+                                    </div>
+                                </div>
+
+                                <nav class="pagination" aria-label="常見問題分頁">
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="第一頁"><i class="bi bi-chevron-bar-left" aria-hidden="true"></i></button>
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="上一頁">上一頁</button>
+                                    <button type="button" class="pageBtn" aria-current="page">1</button>
+                                    <button type="button" class="pageBtn">2</button>
+                                    <button type="button" class="pageBtn">3</button>
+                                    <span aria-hidden="true">…</span>
+                                    <button type="button" class="pageBtn">8</button>
+                                    <button type="button" class="pageBtn" aria-label="下一頁">下一頁</button>
+                                    <button type="button" class="pageBtn" aria-label="最末頁"><i class="bi bi-chevron-bar-right" aria-hidden="true"></i></button>
+                                </nav>
+                            </div>
+
+                            <div role="tabpanel" id="panel-files" aria-labelledby="tab-files" class="tabPanel" hidden>
+                                <ul class="flex-column list-plain">
+                                    <li class="fileRow">
+                                        <a class="fileRow-link" href="#" aria-label="下載臺南市非學校型態實驗教育個人申請書">
+                                            <i class="bi bi-file-earmark-text fileRow-icon" aria-hidden="true"></i>
+                                            <span class="fileRow-name">臺南市非學校型態實驗教育個人申請書</span>
+                                            <span class="fileRow-meta">
+                                                <span class="fileRow-type">DOCX</span>
+                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="fileRow">
+                                        <a class="fileRow-link" href="#" aria-label="下載臺南市非學校型態實驗教育團體申請書">
+                                            <i class="bi bi-file-earmark-text fileRow-icon" aria-hidden="true"></i>
+                                            <span class="fileRow-name">臺南市非學校型態實驗教育團體申請書</span>
+                                            <span class="fileRow-meta">
+                                                <span class="fileRow-type">DOCX</span>
+                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="fileRow">
+                                        <a class="fileRow-link" href="#" aria-label="下載學習狀況報告書參考格式含封面">
+                                            <i class="bi bi-file-earmark-text fileRow-icon" aria-hidden="true"></i>
+                                            <span class="fileRow-name">學習狀況報告書參考格式含封面</span>
+                                            <span class="fileRow-meta">
+                                                <span class="fileRow-type">DOCX</span>
+                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="fileRow">
+                                        <a class="fileRow-link" href="#" aria-label="下載學生輔導諮商服務申請表件">
+                                            <i class="bi bi-file-earmark-pdf fileRow-icon" aria-hidden="true"></i>
+                                            <span class="fileRow-name">學生輔導諮商服務申請表件</span>
+                                            <span class="fileRow-meta">
+                                                <span class="fileRow-type">PDF</span>
+                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="fileRow">
+                                        <a class="fileRow-link" href="#" aria-label="下載非學校型態實驗教育中文版成績單">
+                                            <i class="bi bi-file-earmark-excel fileRow-icon" aria-hidden="true"></i>
+                                            <span class="fileRow-name">非學校型態實驗教育中文版成績單</span>
+                                            <span class="fileRow-meta">
+                                                <span class="fileRow-type">XLSX</span>
+                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <nav class="pagination" aria-label="表件下載分頁">
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="第一頁"><i class="bi bi-chevron-bar-left" aria-hidden="true"></i></button>
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="上一頁">上一頁</button>
+                                    <button type="button" class="pageBtn" aria-current="page">1</button>
+                                    <button type="button" class="pageBtn">2</button>
+                                    <button type="button" class="pageBtn">3</button>
+                                    <span aria-hidden="true">…</span>
+                                    <button type="button" class="pageBtn">8</button>
+                                    <button type="button" class="pageBtn" aria-label="下一頁">下一頁</button>
+                                    <button type="button" class="pageBtn" aria-label="最末頁"><i class="bi bi-chevron-bar-right" aria-hidden="true"></i></button>
+                                </nav>
+                            </div>
+
+                            <div role="tabpanel" id="panel-rules" aria-labelledby="tab-rules" class="tabPanel" hidden>
+                                <ul class="flex-column list-plain">
+                                    <li class="listRow">
+                                        <span class="listRow-date">09/22</span>
+                                        <span class="tagPill">不分類</span>
+                                        <a class="listRow-title" href="#" data-announcement-link>高級中等以下教育階段非學校型態實驗教育實施條例（2023 公告）</a>
+                                        <template>
+                                            <p class="modalMeta-intro">本條例為臺南市辦理高級中等以下教育階段非學校型態實驗教育之法源依據，規範申請資格、審議程序及備查事項等規定，提供申請人及審議委員會共同遵循。</p>
+                                            <div class="modalMeta-attachments">
+                                                <p class="modalMeta-attachmentsTitle">附件下載</p>
+                                                <ul class="flex-column list-plain">
+                                                    <li class="fileRow">
+                                                        <a class="fileRow-link" href="#" aria-label="下載高級中等以下教育階段非學校型態實驗教育實施條例">
+                                                            <i class="bi bi-file-earmark-pdf fileRow-icon" aria-hidden="true"></i>
+                                                            <span class="fileRow-name">高級中等以下教育階段非學校型態實驗教育實施條例</span>
+                                                            <span class="fileRow-meta">
+                                                                <span class="fileRow-type">PDF</span>
+                                                                <i class="bi bi-download fileRow-downloadIcon" aria-hidden="true"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </template>
+                                    </li>
+                                </ul>
+
+                                <nav class="pagination" aria-label="相關法規分頁">
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="第一頁"><i class="bi bi-chevron-bar-left" aria-hidden="true"></i></button>
+                                    <button type="button" class="pageBtn" aria-disabled="true" aria-label="上一頁">上一頁</button>
+                                    <button type="button" class="pageBtn" aria-current="page">1</button>
+                                    <button type="button" class="pageBtn">2</button>
+                                    <button type="button" class="pageBtn">3</button>
+                                    <span aria-hidden="true">…</span>
+                                    <button type="button" class="pageBtn">8</button>
+                                    <button type="button" class="pageBtn" aria-label="下一頁">下一頁</button>
+                                    <button type="button" class="pageBtn" aria-label="最末頁"><i class="bi bi-chevron-bar-right" aria-hidden="true"></i></button>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="homeSection calendarSection" id="calendar" aria-labelledby="calendarHeading">
+            <img class="calendarSection-bg" src="img/dec/校園背景.png" alt="" aria-hidden="true">
+            <div class="calendarSection-inner container">
+                <div class="sectionHeading">
+                    <h2 id="calendarHeading" class="sectionHeading-title">行事曆</h2>
+                    <span class="sectionHeading-eyebrow">CALENDAR</span>
+                    <div class="calendarLegend ms-auto">
+                        <span class="calendarLegend-item"><span class="calendarLegend-dot" aria-hidden="true"></span>有行程</span>
+                        <span class="calendarLegend-item"><span class="calendarLegend-dot calendarLegend-dot--today" aria-hidden="true"></span>今天</span>
+                        <span class="calendarLegend-item"><span class="calendarLegend-dot calendarLegend-dot--important" aria-hidden="true"></span>重要期程</span>
+                    </div>
+                </div>
+
+                <div class="calendarGrid-wrap">
+                    <div class="calendarCard">
+                        <div class="calendarCard-header">
+                            <div class="calendarCard-month">
+                                <span class="calendarCard-monthZh">九月</span>
+                                <span class="calendarCard-year">2026</span>
+                            </div>
+                            <div class="calendarCard-nav">
+                                <button type="button" class="btnOutline" id="calendarToday">回到今天</button>
+                                <button type="button" class="iconCircleBtn" id="calendarPrevMonth" aria-label="上一個月"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+                                <button type="button" class="iconCircleBtn" id="calendarNextMonth" aria-label="下一個月"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+                            </div>
+                            <span class="sr-only" id="calendarMonthAnnounce" aria-live="polite"></span>
+                        </div>
+
+                        <div class="calendarWeekdays" aria-hidden="true">
+                            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+                        </div>
+                        <div class="calendarDates" id="calendarGrid" role="group" aria-label="2026年9月 日期選擇"></div>
+                    </div>
+
+                    <div class="calendarAgenda" id="calendarAgenda">
+                        <div class="calendarAgenda-selected">
+                            <p class="calendarAgenda-selectedDate"><span data-agenda-date>9/25</span> 星期五</p>
+                            <ul class="flex-column list-plain gap-2" data-agenda-list>
+                                <li class="calendarAgenda-selectedItem">申請資料補件截止</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <p class="calendarAgenda-upcomingTitle">近期行程</p>
+                            <ul class="calendarAgenda-upcomingList list-plain mt-2">
+                                <li class="calendarAgenda-upcomingItem">
+                                    <span class="calendarAgenda-upcomingDate">09/25</span>
+                                    <span class="calendarAgenda-upcomingLabel">申請資料補件截止</span>
+                                </li>
+                                <li class="calendarAgenda-upcomingItem">
+                                    <span class="calendarAgenda-upcomingDate">10/01</span>
+                                    <span class="calendarAgenda-upcomingLabel">新學年度申請開始</span>
+                                </li>
+                                <li class="calendarAgenda-upcomingItem">
+                                    <span class="calendarAgenda-upcomingDate">10/15</span>
+                                    <span class="calendarAgenda-upcomingLabel">面談預約</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="homeSection processSteps" id="process" aria-labelledby="processHeading">
+            <img class="processSteps-ribbon" src="img/dec/流程背景緞帶.png" alt="" aria-hidden="true">
+            <div class="processSteps-inner container">
+                <div class="sectionHeading">
+                    <h2 id="processHeading" class="sectionHeading-title">申請流程</h2>
+                    <span class="sectionHeading-eyebrow">HOW IT WORKS</span>
+                </div>
+
+                <ol class="processSteps-list">
+                    <li class="processStep">
+                        <span class="processStep-badge" aria-hidden="true">1</span>
+                        <h3 class="processStep-title">參加說明會</h3>
+                        <p class="processStep-desc">先了解制度、要準備甚麼、甚麼時候辦</p>
+                    </li>
+                    <li class="processStep">
+                        <span class="processStep-badge" aria-hidden="true">2</span>
+                        <h3 class="processStep-title">線上申請</h3>
+                        <p class="processStep-desc">填申請書、上傳附件與同意書</p>
+                    </li>
+                    <li class="processStep">
+                        <span class="processStep-badge" aria-hidden="true">3</span>
+                        <h3 class="processStep-title">初審與訪視</h3>
+                        <p class="processStep-desc">預約面談時間，配合實地會勘</p>
+                    </li>
+                    <li class="processStep">
+                        <span class="processStep-badge" aria-hidden="true">4</span>
+                        <h3 class="processStep-title">審議結果</h3>
+                        <p class="processStep-desc">收到通知，需要的話補件</p>
+                    </li>
+                    <li class="processStep">
+                        <span class="processStep-badge" aria-hidden="true">5</span>
+                        <h3 class="processStep-title">每年交報告</h3>
+                        <p class="processStep-desc">學習狀況報告書或成果報告書</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <div data-layout="layout/footer.html"></div>
+
+    <dialog class="modalCard" id="registerModal" aria-labelledby="registerModalTitle">
+      <div class="modalCard-inner">
+        <div class="modalCard-header">
+            <div>
+                <h2 id="registerModalTitle" class="modalCard-title">註冊新帳號</h2>
+                <p class="modalCard-subtitle">填完送出後，系統會寄啟用信到您的電子信箱。</p>
+            </div>
+            <button type="button" class="modalCard-closeBtn" data-modal-close aria-label="關閉註冊視窗">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="modalCard-body" id="registerForm" novalidate>
+            <fieldset class="formGroup fieldsetReset">
+                <legend class="formLabel">
+                    註冊類型
+                    <span class="formLabel-hint">（學校無須註冊）</span>
+                    <span class="requiredPill">必填</span>
+                </legend>
+                <div class="radioGroup">
+                    <label class="radioOption">
+                        <input type="radio" name="registerType" value="individual" checked>
+                        個人
+                    </label>
+                    <label class="radioOption">
+                        <input type="radio" name="registerType" value="group">
+                        團體
+                    </label>
+                    <label class="radioOption">
+                        <input type="radio" name="registerType" value="org">
+                        機構
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="formGroup">
+                <label class="formLabel" for="registerName">
+                    名稱
+                    <span class="formLabel-hint">（學生or團體機構）</span>
+                    <span class="requiredPill">必填</span>
+                </label>
+                <input class="inputField" type="text" id="registerName" name="name" placeholder="請輸入姓名or名稱" autocomplete="name" required>
+            </div>
+
+            <div class="formGroup">
+                <label class="formLabel" for="registerAccount">
+                    帳號
+                    <span class="requiredPill">必填</span>
+                    <span class="infoTooltip">
+                        <button type="button" class="infoTooltip-trigger" id="accountInfoTrigger" aria-expanded="false" aria-controls="accountInfoPanel" aria-label="帳號填寫說明">
+                            <i class="bi bi-question-circle" aria-hidden="true"></i>
+                        </button>
+                        <div class="infoTooltip-panel" id="accountInfoPanel" role="group" aria-label="帳號怎麼填" hidden>
+                            <p class="infoTooltip-title">帳號怎麼填？</p>
+                            <dl class="infoTooltip-list">
+                                <div class="infoTooltip-row">
+                                    <dt>個人</dt>
+                                    <dd>學生的身分證字號</dd>
+                                </div>
+                                <div class="infoTooltip-row">
+                                    <dt>團體・機構</dt>
+                                    <dd>申請人的身份證字號</dd>
+                                </div>
+                                <div class="infoTooltip-row">
+                                    <dt>學校</dt>
+                                    <dd>學校代碼，不用註冊</dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </span>
+                </label>
+                <fieldset class="fieldsetReset">
+                    <legend class="sr-only">帳號類型</legend>
+                    <div class="radioGroup">
+                        <label class="radioOption">
+                            <input type="radio" name="accountType" value="id" checked>
+                            身分證
+                        </label>
+                        <label class="radioOption">
+                            <input type="radio" name="accountType" value="residence">
+                            居留證
+                        </label>
+                    </div>
+                </fieldset>
+                <input class="inputField" type="text" id="registerAccount" name="account" placeholder="請輸入身分證字號或學校代碼" required>
+            </div>
+
+            <div class="formGroup">
+                <label class="formLabel" for="registerEmail">
+                    電子信箱
+                    <span class="requiredPill">必填</span>
+                </label>
+                <input class="inputField" type="email" id="registerEmail" name="email" placeholder="啟用信會寄到這裡" autocomplete="email" required>
+            </div>
+
+            <label class="agreementRow">
+                <input type="checkbox" id="registerAgree" required>
+                <span class="agreementRow-text">
+                    <span class="agreementRow-title">
+                        我已閱讀並同意
+                        <button type="button" class="btnText agreementRow-link" data-modal-open="privacyModal">&lt; 網站隱私權條款 &gt;</button>
+                        內容
+                    </span>
+                    <span class="agreementRow-desc">您的姓名、身分證字號與電子信箱，僅用於辦理本站線上申請服務。</span>
+                </span>
+            </label>
+
+            <div class="modalCard-actions">
+                <button type="button" class="btnSolid btnSolid-neutral" data-modal-close>取消</button>
+                <button type="submit" class="btnSolid btnSolid-maroon flex-grow-1" id="registerSubmit" aria-disabled="true" aria-describedby="registerSubmitHint">
+                    送出註冊
+                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+            <p class="sr-only" id="registerSubmitHint">請先勾選同意網站隱私權條款才能送出註冊</p>
+        </form>
+
+        <div class="modalCard-footer flex-row-between flex-wrap gap-2">
+            <p class="modalCard-footerLine">已經有帳號了？<button type="button" class="btnText" data-modal-close>回到登入</button></p>
+            <p class="modalCard-footerLine"><i class="bi bi-play-circle" aria-hidden="true"></i><a class="btnText" href="#howto-video" target="_blank">註冊教學影片</a></p>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="modalCard" id="privacyModal" aria-labelledby="privacyModalTitle">
+      <div class="modalCard-inner">
+        <div class="modalCard-header">
+            <h2 id="privacyModalTitle" class="modalCard-title">網站隱私權條款</h2>
+            <button type="button" class="modalCard-closeBtn" data-modal-close aria-label="關閉隱私權條款視窗">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div class="privacyModal-body">
+            <section class="privacyModal-section">
+                <h3>一、適用範圍</h3>
+                <p>本隱私權政策適用於您在本站活動時的個人資料蒐集、運用與保護，不適用於與本站功能鏈結之網站；經由本站連結之各政府機關、團體或公司網站，均有其專屬隱私權政策，本站不負連帶責任。</p>
+            </section>
+            <section class="privacyModal-section">
+                <h3>二、個人資料的蒐集</h3>
+                <p>為提供線上申請服務，本站會請您提供姓名、聯絡電話、電子郵件信箱等最新且正確之個人資料；單純瀏覽或下載檔案時，本站不會蒐集任何身分資料。非經您本人同意，本站不會自行修改或刪除您的個人資料及檔案，但依合法途徑之要求、為保護使用者權益或為維護本站權益者不在此限。</p>
+            </section>
+            <section class="privacyModal-section">
+                <h3>三、您應盡的義務</h3>
+                <p>請隨時維持個人資料的正確、最新與完整，提供不實資料者，本站得拒絕您以該帳號使用本站全部或部分服務；帳號密碼的保密是本站與您共同的責任，每次使用完畢請記得登出，若與他人共用電腦或使用公用電腦，請務必關閉瀏覽器視窗以防他人讀取您的個人資料；並請遵循國內外相關法律規範。</p>
+            </section>
+            <section class="privacyModal-section">
+                <h3>四、當事人權利與責任</h3>
+                <p>您對所屬帳號、密碼所發生之一切情事，應負全部責任。</p>
+            </section>
+            <section class="privacyModal-section">
+                <h3>五、聯絡方式</h3>
+                <p>發現帳號遭盜用或其他安全問題時，請立即以電子郵件通知本站，以便資訊人員協助處理。</p>
+            </section>
+        </div>
+
+        <div class="modalCard-actions">
+            <button type="button" class="btnSolid btnSolid-neutral" data-modal-close>取消</button>
+            <button type="button" class="btnSolid btnSolid-maroon flex-grow-1" id="privacyAgreeBtn">
+                同意並返回註冊
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="modalCard" id="resendModal" aria-labelledby="resendModalTitle">
+      <div class="modalCard-inner">
+        <div class="modalCard-header">
+            <div>
+                <h2 id="resendModalTitle" class="modalCard-title">重寄啟用碼</h2>
+                <p class="modalCard-subtitle">請輸入您註冊時使用的帳號，系統會重新寄送啟用信到註冊信箱。</p>
+            </div>
+            <button type="button" class="modalCard-closeBtn" data-modal-close aria-label="關閉重寄啟用碼視窗">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="modalCard-body" id="resendForm" novalidate>
+            <div class="formGroup">
+                <label class="formLabel" for="resendAccount">
+                    帳號
+                    <span class="requiredPill">必填</span>
+                </label>
+                <input class="inputField" type="text" id="resendAccount" name="account" placeholder="請輸入身分證字號或學校代碼" autocomplete="username" required>
+            </div>
+
+            <div class="modalCard-actions">
+                <button type="button" class="btnSolid btnSolid-neutral" data-modal-close>取消</button>
+                <button type="submit" class="btnSolid btnSolid-maroon flex-grow-1">
+                    確定並送出
+                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog class="modalCard" id="forgotPasswordModal" aria-labelledby="forgotPasswordModalTitle">
+      <div class="modalCard-inner">
+        <div class="modalCard-header">
+            <div>
+                <h2 id="forgotPasswordModalTitle" class="modalCard-title">忘記密碼</h2>
+                <p class="modalCard-subtitle">請輸入帳號與註冊信箱，系統會將密碼寄送至該信箱。</p>
+            </div>
+            <button type="button" class="modalCard-closeBtn" data-modal-close aria-label="關閉忘記密碼視窗">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="modalCard-body" id="forgotPasswordForm" novalidate>
+            <div class="formGroup">
+                <label class="formLabel" for="forgotPasswordAccount">
+                    帳號
+                    <span class="requiredPill">必填</span>
+                </label>
+                <input class="inputField" type="text" id="forgotPasswordAccount" name="account" placeholder="請輸入身分證字號或學校代碼" autocomplete="username" required>
+            </div>
+
+            <div class="formGroup">
+                <label class="formLabel" for="forgotPasswordEmail">
+                    電子信箱
+                    <span class="requiredPill">必填</span>
+                </label>
+                <input class="inputField" type="email" id="forgotPasswordEmail" name="email" placeholder="請輸入註冊時填寫的電子信箱" autocomplete="email" required>
+            </div>
+
+            <div class="modalCard-actions">
+                <button type="button" class="btnSolid btnSolid-neutral" data-modal-close>取消</button>
+                <button type="submit" class="btnSolid btnSolid-maroon flex-grow-1">
+                    確定並送出
+                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog class="modalCard modalCard--wide" id="announcementModal" aria-labelledby="announcementModalTitle">
+      <div class="modalCard-inner">
+        <div class="modalCard-header">
+            <div class="flex-row-start flex-wrap gap-2">
+                <span class="tagPill" id="announcementModalCategory"></span>
+                <span class="listRow-date" id="announcementModalDate"></span>
+            </div>
+            <button type="button" class="modalCard-closeBtn" data-modal-close aria-label="關閉公告視窗">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+        <h2 id="announcementModalTitle" class="modalCard-title"></h2>
+        <div class="modalCard-body" id="announcementModalBody"></div>
+        <div class="modalCard-actions">
+            <button type="button" class="btnOutline flex-grow-1" data-modal-close>關閉</button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="js/all.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+// 基礎重置與全站共用規則（無障礙硬性規定見 ACCESSIBILITY.md）
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  // 扣掉 sticky header 高度，避免錨點捲動後區塊標題被 header 擋住
+  scroll-padding-top: calc(var(--header-height) + var(--space-24));
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: $font-family-base;
+  color: var(--ink-1);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+.mainContent {
+  flex: 1 0 auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--brand-maroon);
+  text-decoration: none;
+
+}
+
+button {
+  font-family: inherit;
+}
+
+// 中文不使用斜體：避免瀏覽器產生假斜體讓筆畫粗細軸歪掉
+:lang(zh-Hant) em,
+:lang(zh-Hant) i {
+  font-style: normal;
+}
+
+// ── 跳過導覽（ACCESSIBILITY.md §1、§2）──────────────────────
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.sr-only.focusable {
+  &:focus,
+  &:active {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    z-index: 2000;
+    padding: 10px 18px;
+    background: var(--brand-maroon);
+    color: #fff;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+// ── 焦點可見狀態（ACCESSIBILITY.md §4.1）────────────────────
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.input-field:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  border-color: var(--brand-maroon);
+  box-shadow: 0 0 0 3px var(--color-primary-focus-ring);
+  outline: none;
+}
+
+// ── 減少動態效果（ACCESSIBILITY.md §9）──────────────────────
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

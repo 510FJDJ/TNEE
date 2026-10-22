@@ -1,0 +1,65 @@
+// 字級（design.md §3）。內文不得小於 16px；需要被讀懂的資訊一律 body/l。
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink-1);
+  margin: 0;
+}
+
+.text-display {
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.text-title-l {
+  font-size: 28px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.text-title-m {
+  font-size: 22px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.text-title-s {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.text-eyebrow {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+.text-meta {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-3);
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  margin: 0;
+}

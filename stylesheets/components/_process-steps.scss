@@ -1,0 +1,107 @@
+.processSteps {
+  position: relative;
+  padding: 40px 0 56px;
+  overflow: hidden;
+}
+
+.processSteps-ribbon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 58%;
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+
+  @media (max-width: 980px) {
+    display: none;
+  }
+}
+
+.processSteps-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.processSteps-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  // padding-top 68px：容納偶數卡片 margin-top:-48 ＋ 徽章再上移 -18，
+  // 讓浮起的徽章仍落在 padding box 內；寬度不足時 flex-wrap 讓卡片自動換行，不再橫向捲動
+  padding: 68px 4px 4px;
+
+  @media (max-width: 980px) {
+    flex-direction: column;
+    padding: 28px 0 0;
+  }
+}
+
+.processStep {
+  position: relative;
+  flex: 1 1;
+  min-width: 200px;
+  background: var(--surface-card);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-card);
+  padding: 28px 22px 22px;
+
+  &:nth-child(2n) {
+    margin-top: -48px;
+
+    @media (max-width: 980px) {
+      margin-top: 0;
+    }
+  }
+
+  // 手機版單欄排列時改左右交錯，呼應緞帶經過卡片中軸的視覺動線
+  @media (max-width: 980px) {
+    max-width: 84%;
+
+    &:nth-child(odd) {
+      align-self: flex-start;
+    }
+
+    &:nth-child(even) {
+      align-self: flex-end;
+    }
+  }
+}
+
+.processStep-badge {
+  position: absolute;
+  top: -18px;
+  left: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-gold-ink);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(169, 121, 63, 0.4);
+}
+
+.processStep-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink-1);
+  margin: 10px 0 8px;
+}
+
+.processStep-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}

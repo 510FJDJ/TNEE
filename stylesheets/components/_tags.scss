@@ -1,0 +1,49 @@
+.tagPill {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-tint);
+  border: 1px solid var(--line-default);
+  color: var(--ink-2);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-default);
+  background: #fff;
+  color: var(--ink-2);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--dur-ui) var(--ease-brand), color var(--dur-ui) var(--ease-brand), border-color var(--dur-ui) var(--ease-brand);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--brand-maroon);
+  }
+
+  &[aria-pressed="true"] {
+    background: var(--brand-maroon);
+    border-color: var(--brand-maroon);
+    color: #fff;
+  }
+}
+
+.filterPill-label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1);
+  margin-right: 4px;
+}

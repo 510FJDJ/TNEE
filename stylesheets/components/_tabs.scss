@@ -1,0 +1,66 @@
+// 無障礙頁籤互動規範見 ACCESSIBILITY.md §13
+
+// 分頁像資料夾分頁一樣貼齊卡片頂端：選中的分頁用卡片同色白底並以負
+// margin-bottom 疊上卡片邊緣，視覺上與卡片融合不中斷；未選中的分頁退後
+// 一截、用較淺的米色底，呈現「退到卡片後方」的層次。
+.tabList {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 0 0 32px;
+  margin-bottom: -1px;
+
+  @media (max-width: 980px) {
+    padding-left: 12px;
+  }
+}
+
+.tabBtn {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-tint);
+  border: none;
+  border-radius: var(--radius-base) var(--radius-base) 0 0;
+  padding: 14px 24px 12px;
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink-3);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--dur-ui) var(--ease-brand), color var(--dur-ui) var(--ease-brand);
+
+  @media (max-width: 980px) {
+    padding: 11px 18px 10px;
+    font-size: 18px;
+  }
+
+
+  &:hover {
+    color: var(--brand-maroon);
+  }
+
+  &[aria-selected="true"] {
+    z-index: 2;
+    background: var(--surface-card);
+    color: var(--brand-maroon);
+    margin-top: 0;
+    padding-bottom: 16px;
+    box-shadow: 0 -4px 12px rgba(109, 33, 37, 0.06);
+
+    @media (max-width: 980px) {
+      padding-bottom: 13px;
+    }
+
+    @media (max-width: 560px) {
+      padding-bottom: 11px;
+    }
+  }
+}
+
+
+.tabPanel[hidden] {
+  display: none;
+}

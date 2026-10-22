@@ -1,0 +1,265 @@
+.announcementSection {
+  min-width: 0;
+}
+
+.announcementCard {
+  background: var(--surface-card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.announcementToolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+// ── 列表列（最新消息／相關法規共用）──────────────────────────
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+  font-family: var(--font-body);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.listRow-date {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-3);
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.listRow-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 16px;
+  color: var(--ink-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listRow a.listRow-title {
+  color: var(--ink-1);
+
+  &:hover,
+  &:focus-visible {
+    color: var(--brand-maroon);
+    text-decoration: underline;
+  }
+}
+
+// ── 表件下載列 ────────────────────────────────────────────
+.fileRow {
+  border-bottom: 1px solid var(--line-soft);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.fileRow-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px;
+  padding: 16px 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    .fileRow-icon,
+    .fileRow-name,
+    .fileRow-type,
+    .fileRow-downloadIcon {
+      color: var(--brand-maroon-deep);
+    }
+  }
+}
+
+.fileRow-icon {
+  color: var(--ink-3);
+  flex-shrink: 0;
+  transition: color var(--dur-ui) var(--ease-brand);
+}
+
+.fileRow-name {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--ink-1);
+  // 檔名長度不一，與其裁成「...」看不到完整檔名，寧可讓它換行：
+  // 右邊固定寬度的 PDF／下載 icon 不會被擠壓（見 .fileRow-meta flex-shrink:0）。
+  overflow-wrap: break-word;
+  transition: color var(--dur-ui) var(--ease-brand);
+}
+
+.fileRow-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  padding-left: 16px;
+  border-left: 1px solid var(--line-default);
+}
+
+.fileRow-type {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+  transition: color var(--dur-ui) var(--ease-brand);
+}
+
+.fileRow-downloadIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-maroon);
+  transition: color var(--dur-ui) var(--ease-brand);
+}
+
+// ── 常見問題 Accordion ───────────────────────────────────
+.faqItem {
+  border-bottom: 1px solid var(--line-soft);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.faqItem-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-body);
+}
+
+.faqItem-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--surface-maroon-tint);
+  color: var(--brand-maroon);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.faqItem-question {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+.faqItem-tag {
+  flex-shrink: 0;
+}
+
+.faqItem-chevron {
+  flex-shrink: 0;
+  color: var(--ink-3);
+  transition: transform var(--dur-ui) var(--ease-brand);
+}
+
+.faqItem-trigger[aria-expanded="true"] .faqItem-chevron {
+  transform: rotate(180deg);
+  color: var(--brand-maroon);
+}
+
+.faqItem-panel {
+  padding: 0 0 20px 40px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  background: var(--surface-tint);
+  border-radius: var(--radius-base);
+  padding: 16px 20px;
+  margin-bottom: 4px;
+}
+
+.faqItem-panel[hidden] {
+  display: none;
+}
+
+// ── 分頁 ─────────────────────────────────────────────────
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}
+
+.pageBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-default);
+  background: #fff;
+  color: var(--ink-2);
+  font-family: var(--font-body);
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--brand-maroon);
+    color: var(--brand-maroon);
+  }
+
+  &[aria-current="page"] {
+    background: var(--brand-maroon);
+    border-color: var(--brand-maroon);
+    color: #fff;
+  }
+
+  &[aria-disabled="true"] {
+    color: var(--line-default);
+    border-color: var(--line-soft);
+    cursor: not-allowed;
+  }
+}
+
+.emptyState {
+  padding: 40px 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink-3);
+}

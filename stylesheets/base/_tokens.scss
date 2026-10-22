@@ -1,0 +1,68 @@
+// 設計 Token（單一事實來源見 design.md §2–§4）
+// 以 CSS 自訂屬性輸出，元件樣式一律引用這裡的變數，不得在元件檔內寫死色碼
+
+:root {
+  // 品牌色
+  --brand-maroon: #6D2125;
+  --brand-maroon-deep: #551A1D;
+  --brand-maroon-soft: #7B373A;
+
+  // 點綴色
+  --accent-gold: #C9A06B;
+  --accent-gold-ink: #A9793F;
+  --accent-red: #BA2013;
+  --accent-coral: #E2626D;
+  --accent-coral-ink: #B23A45;
+
+  // 中性色
+  --ink-1: #2B211C;
+  --ink-2: #4A3F3A;
+  --ink-3: #6B5F59;
+  --line-default: #E4DCD2;
+  --line-soft: #EFE8DD;
+  --surface-page: #FAF8F1;
+  --surface-card: #FFFFFF;
+  --surface-tint: #F5F1E8;
+  --surface-maroon-tint: #F3E7E6;
+  --surface-input: #F3F3F5;
+  --line-input: #D7D7DC;
+  --line-input-hover: #B9B9C2;
+
+  // 狀態色
+  --state-pass: #2F6F4E;
+  --state-wait: #4A3F3A;
+  --state-warn: #A9793F;
+  --state-danger: #BA2013;
+
+  // 焦點樣式（ACCESSIBILITY.md §4.1）
+  --color-focus: #BA2013;
+  --color-primary-focus-ring: rgba(109, 33, 37, 0.18);
+
+  // 字體
+  --font-display: "Noto Serif TC", "Noto Sans TC", serif;
+  --font-body: "Poppins", "Noto Sans TC", sans-serif;
+
+  // 間距階
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  // 版面
+  --header-height: 84px;
+
+  // 圓角／陰影／動效
+  --radius-base: 14px;
+  --radius-lg: 40px;
+  --radius-pill: 999px;
+  --shadow-card: 0 10px 30px rgba(109, 33, 37, 0.1);
+  --shadow-card-hover: 0 14px 36px rgba(109, 33, 37, 0.14);
+  --dur-ui: 160ms;
+  --ease-brand: cubic-bezier(0.65, 0, 0.35, 1);
+}

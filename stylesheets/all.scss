@@ -1,0 +1,39 @@
+// Live Sass Compiler / `npm run sass:build` 的編譯入口
+// 輸出至 ../css/all.css，嚴禁手動修改編譯後的 CSS
+
+@import "helpers/variables";
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/utilities";
+@import "../node_modules/bootstrap/scss/helpers";
+@import "../node_modules/bootstrap/scss/utilities/api";
+
+// Bootstrap Icons（地端化，見 /css/vendor/bootstrap-icons/，由純 CSS @import 引入，
+// 注意：此 @import 路徑是相對於編譯後輸出位置 css/all.css，不是 stylesheets/all.scss 本身）
+@import url("vendor/bootstrap-icons/bootstrap-icons.css");
+
+@import "base/font";
+@import "base/tokens";
+@import "base/base";
+@import "base/flex";
+@import "base/typography";
+
+@import "components/decor";
+@import "components/layout";
+@import "components/header";
+@import "components/buttons";
+@import "components/forms";
+@import "components/login-card";
+@import "components/modal";
+@import "components/tags";
+@import "components/tabs";
+@import "components/announcement-card";
+@import "components/calendar";
+@import "components/process-steps";
+@import "components/footer";
