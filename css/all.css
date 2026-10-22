@@ -7958,7 +7958,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
   padding: 10px 20px;
 }
 
@@ -8002,8 +8001,6 @@ body {
   font-weight: 700;
   color: var(--ink-1);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .siteHeader-wordmarkEn {
@@ -9389,7 +9386,7 @@ dialog.modalCard::backdrop {
 
 .processSteps {
   position: relative;
-  padding: 40px 0 56px;
+  padding: 0 0 56px;
   overflow: hidden;
 }
 
