@@ -9170,6 +9170,8 @@ dialog.modalCard::backdrop {
   border-radius: 20px;
   box-shadow: var(--shadow-card);
   padding: 28px;
+  min-width: 0;
+  overflow-x: auto;
 }
 
 .calendarCard-header {
@@ -9177,6 +9179,7 @@ dialog.modalCard::backdrop {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  min-width: 332px;
 }
 
 .calendarCard-month {
@@ -9209,6 +9212,7 @@ dialog.modalCard::backdrop {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px;
+  min-width: 332px;
   text-align: center;
 }
 

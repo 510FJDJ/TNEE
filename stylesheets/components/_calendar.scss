@@ -44,18 +44,25 @@
   align-items: start;
 }
 
+// 日期圓圈為固定尺寸（WCAG 44px 觸控下限），寬度不足時讓整張卡片（含月份標頭）
+// 一起橫向滾動，不讓 .calendarAgenda 被撐寬（兩者共用同一個 grid 欄寬）
 .calendarCard {
   background: var(--surface-card);
   border-radius: 20px;
   box-shadow: var(--shadow-card);
   padding: 28px;
+  min-width: 0;
+  overflow-x: auto;
 }
 
+// 332px = 7 顆日期圓圈（44px，WCAG 觸控下限）+ 6 條欄距（4px），
+// 與下方 .calendarWeekdays／.calendarDates 的最小寬度一致，橫向滾動時三者才不會對不齊
 .calendarCard-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  min-width: 332px;
 }
 
 .calendarCard-month {
@@ -88,6 +95,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px;
+  min-width: 332px;
   text-align: center;
 }
 
