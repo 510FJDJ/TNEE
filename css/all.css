@@ -7893,7 +7893,7 @@ body {
   }
 }
 .homeSection {
-  padding: 56px 12px;
+  padding: 36px 12px;
 }
 @media (max-width: 980px) {
   .homeSection {
@@ -8313,35 +8313,36 @@ body {
   color: var(--ink-2);
 }
 
-.searchField {
-  flex: 1 1 220px;
-  min-width: 220px;
+.searchField-row {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+.searchField {
+  width: 100%;
   min-height: 48px;
-  padding: 0 16px;
+  padding: 0 16px 0 44px;
   border-radius: var(--radius-base);
   border: 1px solid var(--line-default);
   background: #fff;
-}
-
-.searchField input {
-  flex: 1;
-  border: none;
-  outline: none;
-  background: transparent;
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--ink-1);
 }
-.searchField input::placeholder {
+.searchField::placeholder {
   color: var(--ink-3);
 }
 
 .searchField-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--ink-3);
-  flex-shrink: 0;
+  pointer-events: none;
 }
 
 .loginCard {
@@ -9118,30 +9119,10 @@ dialog.modalCard::backdrop {
   color: var(--ink-3);
 }
 
-.calendarSection {
-  position: relative;
-  padding: 48px 0 64px;
-}
-
-.calendarSection-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  top: -240px;
-  object-fit: cover;
-  object-position: bottom;
-  width: 100%;
-  height: auto;
-}
-@media (max-width: 980px) {
-  .calendarSection-bg {
-    height: 100%;
-  }
-}
-
-.calendarSection-inner {
-  position: relative;
-  z-index: 1;
+.calendarTab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .calendarLegend {
@@ -9179,14 +9160,9 @@ dialog.modalCard::backdrop {
 
 .calendarGrid-wrap {
   display: grid;
-  grid-template-columns: minmax(320px, 496px) 1fr;
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
-}
-@media (max-width: 980px) {
-  .calendarGrid-wrap {
-    grid-template-columns: 1fr;
-  }
 }
 
 .calendarCard {
@@ -9253,8 +9229,9 @@ dialog.modalCard::backdrop {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 100%;
+  width: 44px;
   aspect-ratio: 1/1;
+  margin: 0 auto;
   border: none;
   background: transparent;
   border-radius: 50%;
@@ -9272,7 +9249,7 @@ dialog.modalCard::backdrop {
 .calendarDate::after {
   content: "";
   position: absolute;
-  bottom: 4px;
+  bottom: 2px;
   width: 5px;
   height: 5px;
   border-radius: 50%;

@@ -377,6 +377,17 @@
     }
   }
 
+  // 點選日期後捲動到剛好完整露出排程區塊：只在排程還沒完整顯示時才捲動，
+  // 且只捲動到露出排程下緣所需的最小距離，避免每次點選日期整頁大幅跳動
+  function revealAgenda(agenda) {
+    var rect = agenda.getBoundingClientRect();
+    if (rect.top >= 0 && rect.bottom <= window.innerHeight) return;
+
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var minScrollForAgenda = rect.bottom + window.scrollY - window.innerHeight;
+    window.scrollTo({ top: minScrollForAgenda, left: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
   function init() {
     var grid = document.getElementById("calendarGrid");
     var agenda = document.getElementById("calendarAgenda");
@@ -409,6 +420,7 @@
       btn.setAttribute("aria-pressed", "true");
 
       updateAgenda(agenda, currentYear, currentMonth, Number(btn.dataset.day));
+      revealAgenda(agenda);
     });
 
     if (prevBtn) {
@@ -733,6 +745,56 @@
   function init() {
     initSimpleModalForm("resendForm", "resendModal");
     initSimpleModalForm("forgotPasswordForm", "forgotPasswordModal");
+  }
+
+  document.addEventListener("layout:loaded", init);
+})();
+
+// 行事曆頁籤對「階段篩選／搜尋」無意義，選中時隱藏 toolbar；data-hide-toolbar 標記例外見 design.md §6.3
+
+(function () {
+  "use strict";
+
+  function init() {
+    document.querySelectorAll('[role="tablist"]').forEach(function (tablist) {
+      var toolbar = tablist.parentElement && tablist.parentElement.querySelector(".announcementToolbar");
+      if (!toolbar) return;
+
+      tablist.querySelectorAll('[role="tab"]').forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          toolbar.hidden = tab.hasAttribute("data-hide-toolbar");
+        });
+      });
+    });
+  }
+
+  document.addEventListener("layout:loaded", init);
+})();
+
+// #tab-xxx 深連結頁籤切換，涵蓋初始載入／hashchange／同頁 click 三種情境，見 ACCESSIBILITY.md §13.3
+
+(function () {
+  "use strict";
+
+  function activateTabFromHash(hash) {
+    if (!hash) return;
+    var tab = document.getElementById(hash.replace(/^#/, ""));
+    if (tab && tab.getAttribute("role") === "tab") {
+      tab.click();
+    }
+  }
+
+  function init() {
+    activateTabFromHash(window.location.hash);
+
+    window.addEventListener("hashchange", function () {
+      activateTabFromHash(window.location.hash);
+    });
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest('a[href^="#tab-"]');
+      if (link) activateTabFromHash(link.getAttribute("href"));
+    });
   }
 
   document.addEventListener("layout:loaded", init);

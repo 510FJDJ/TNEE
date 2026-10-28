@@ -107,6 +107,7 @@
                             <button role="tab" id="tab-faq" aria-selected="false" aria-controls="panel-faq" tabindex="-1" class="tabBtn">常見問題</button>
                             <button role="tab" id="tab-files" aria-selected="false" aria-controls="panel-files" tabindex="-1" class="tabBtn">表件下載</button>
                             <button role="tab" id="tab-rules" aria-selected="false" aria-controls="panel-rules" tabindex="-1" class="tabBtn">相關法規</button>
+                            <button role="tab" id="tab-calendar" aria-selected="false" aria-controls="panel-calendar" tabindex="-1" class="tabBtn" data-hide-toolbar="true">行事曆</button>
                         </div>
 
                         <div class="announcementCard">
@@ -121,10 +122,10 @@
                                     <button type="button" class="filterPill" aria-pressed="false">團體機構</button>
                                 </div>
                                 <div class="flex-row-start flex-wrap gap-2 w-100">
-                                    <div class="searchField">
+                                    <div class="searchField-row">
                                         <i class="bi bi-search searchField-icon" aria-hidden="true"></i>
                                         <label class="sr-only" for="announcementSearch">搜尋關鍵字</label>
-                                        <input type="search" id="announcementSearch" placeholder="搜尋關鍵字">
+                                        <input type="search" id="announcementSearch" class="searchField" placeholder="搜尋關鍵字">
                                     </div>
                                     <button type="submit" class="btnSolid btnSolid-maroon">查詢</button>
                                 </div>
@@ -432,75 +433,70 @@
                                     <button type="button" class="pageBtn" aria-label="最末頁"><i class="bi bi-chevron-bar-right" aria-hidden="true"></i></button>
                                 </nav>
                             </div>
+
+                            <div role="tabpanel" id="panel-calendar" aria-labelledby="tab-calendar" class="tabPanel" hidden>
+                                <div class="calendarTab">
+                                    <div class="calendarLegend">
+                                        <span class="calendarLegend-item"><span class="calendarLegend-dot" aria-hidden="true"></span>有行程</span>
+                                        <span class="calendarLegend-item"><span class="calendarLegend-dot calendarLegend-dot--today" aria-hidden="true"></span>今天</span>
+                                        <span class="calendarLegend-item"><span class="calendarLegend-dot calendarLegend-dot--important" aria-hidden="true"></span>重要期程</span>
+                                    </div>
+
+                                    <div class="calendarGrid-wrap">
+                                        <div class="calendarCard">
+                                            <div class="calendarCard-header">
+                                                <div class="calendarCard-month">
+                                                    <span class="calendarCard-monthZh">九月</span>
+                                                    <span class="calendarCard-year">2026</span>
+                                                </div>
+                                                <div class="calendarCard-nav">
+                                                    <button type="button" class="btnOutline" id="calendarToday">回到今天</button>
+                                                    <button type="button" class="iconCircleBtn" id="calendarPrevMonth" aria-label="上一個月"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+                                                    <button type="button" class="iconCircleBtn" id="calendarNextMonth" aria-label="下一個月"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+                                                </div>
+                                                <span class="sr-only" id="calendarMonthAnnounce" aria-live="polite"></span>
+                                            </div>
+
+                                            <div class="calendarWeekdays" aria-hidden="true">
+                                                <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+                                            </div>
+                                            <div class="calendarDates" id="calendarGrid" role="group" aria-label="2026年9月 日期選擇"></div>
+                                        </div>
+
+                                        <div class="calendarAgenda" id="calendarAgenda">
+                                            <div class="calendarAgenda-selected">
+                                                <p class="calendarAgenda-selectedDate"><span data-agenda-date>9/25</span> 星期五</p>
+                                                <ul class="flex-column list-plain gap-2" data-agenda-list>
+                                                    <li class="calendarAgenda-selectedItem">申請資料補件截止</li>
+                                                </ul>
+                                            </div>
+
+                                            <div>
+                                                <p class="calendarAgenda-upcomingTitle">近期行程</p>
+                                                <ul class="calendarAgenda-upcomingList list-plain mt-2">
+                                                    <li class="calendarAgenda-upcomingItem">
+                                                        <span class="calendarAgenda-upcomingDate">09/25</span>
+                                                        <span class="calendarAgenda-upcomingLabel">申請資料補件截止</span>
+                                                    </li>
+                                                    <li class="calendarAgenda-upcomingItem">
+                                                        <span class="calendarAgenda-upcomingDate">10/01</span>
+                                                        <span class="calendarAgenda-upcomingLabel">新學年度申請開始</span>
+                                                    </li>
+                                                    <li class="calendarAgenda-upcomingItem">
+                                                        <span class="calendarAgenda-upcomingDate">10/15</span>
+                                                        <span class="calendarAgenda-upcomingLabel">面談預約</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-
-        <section class="homeSection calendarSection" id="calendar" aria-labelledby="calendarHeading">
-            <img class="calendarSection-bg" src="img/dec/校園背景.png" alt="" aria-hidden="true">
-            <div class="calendarSection-inner container">
-                <div class="sectionHeading">
-                    <h2 id="calendarHeading" class="sectionHeading-title">行事曆</h2>
-                    <span class="sectionHeading-eyebrow">CALENDAR</span>
-                    <div class="calendarLegend ms-auto">
-                        <span class="calendarLegend-item"><span class="calendarLegend-dot" aria-hidden="true"></span>有行程</span>
-                        <span class="calendarLegend-item"><span class="calendarLegend-dot calendarLegend-dot--today" aria-hidden="true"></span>今天</span>
-                        <span class="calendarLegend-item"><span class="calendarLegend-dot calendarLegend-dot--important" aria-hidden="true"></span>重要期程</span>
-                    </div>
-                </div>
-
-                <div class="calendarGrid-wrap">
-                    <div class="calendarCard">
-                        <div class="calendarCard-header">
-                            <div class="calendarCard-month">
-                                <span class="calendarCard-monthZh">九月</span>
-                                <span class="calendarCard-year">2026</span>
-                            </div>
-                            <div class="calendarCard-nav">
-                                <button type="button" class="btnOutline" id="calendarToday">回到今天</button>
-                                <button type="button" class="iconCircleBtn" id="calendarPrevMonth" aria-label="上一個月"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
-                                <button type="button" class="iconCircleBtn" id="calendarNextMonth" aria-label="下一個月"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
-                            </div>
-                            <span class="sr-only" id="calendarMonthAnnounce" aria-live="polite"></span>
-                        </div>
-
-                        <div class="calendarWeekdays" aria-hidden="true">
-                            <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
-                        </div>
-                        <div class="calendarDates" id="calendarGrid" role="group" aria-label="2026年9月 日期選擇"></div>
-                    </div>
-
-                    <div class="calendarAgenda" id="calendarAgenda">
-                        <div class="calendarAgenda-selected">
-                            <p class="calendarAgenda-selectedDate"><span data-agenda-date>9/25</span> 星期五</p>
-                            <ul class="flex-column list-plain gap-2" data-agenda-list>
-                                <li class="calendarAgenda-selectedItem">申請資料補件截止</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <p class="calendarAgenda-upcomingTitle">近期行程</p>
-                            <ul class="calendarAgenda-upcomingList list-plain mt-2">
-                                <li class="calendarAgenda-upcomingItem">
-                                    <span class="calendarAgenda-upcomingDate">09/25</span>
-                                    <span class="calendarAgenda-upcomingLabel">申請資料補件截止</span>
-                                </li>
-                                <li class="calendarAgenda-upcomingItem">
-                                    <span class="calendarAgenda-upcomingDate">10/01</span>
-                                    <span class="calendarAgenda-upcomingLabel">新學年度申請開始</span>
-                                </li>
-                                <li class="calendarAgenda-upcomingItem">
-                                    <span class="calendarAgenda-upcomingDate">10/15</span>
-                                    <span class="calendarAgenda-upcomingLabel">面談預約</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section class="homeSection processSteps" id="process" aria-labelledby="processHeading">
             <img class="processSteps-ribbon" src="img/dec/流程背景緞帶.png" alt="" aria-hidden="true">

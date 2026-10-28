@@ -1,25 +1,7 @@
-.calendarSection {
-  position: relative;
-  padding: 48px 0 64px;
-}
-
-.calendarSection-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  top:-240px;
-  object-fit: cover;
-  object-position: bottom;
-  width: 100%;
-  height: auto;
-   @media (max-width: 980px) {
-    height: 100%;
-  }
-}
-
-.calendarSection-inner {
-  position: relative;
-  z-index: 1;
+.calendarTab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .calendarLegend {
@@ -57,13 +39,9 @@
 
 .calendarGrid-wrap {
   display: grid;
-  grid-template-columns: minmax(320px, 496px) 1fr;
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: start;
-
-  @media (max-width: 980px) {
-    grid-template-columns: 1fr;
-  }
 }
 
 .calendarCard {
@@ -130,8 +108,9 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 100%;
+  width: 44px;
   aspect-ratio: 1 / 1;
+  margin: 0 auto;
   border: none;
   background: transparent;
   border-radius: 50%;
@@ -149,7 +128,7 @@
 .calendarDate::after {
   content: "";
   position: absolute;
-  bottom: 4px;
+  bottom: 2px;
   width: 5px;
   height: 5px;
   border-radius: 50%;
